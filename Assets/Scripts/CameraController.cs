@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Vector2 turn;
+    public float sensativity = 5f;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        //rotating the Camera Target based off of Mouse input
+        turn.x += Input.GetAxis("Mouse X") * sensativity;
+        turn.y += Input.GetAxis("Mouse Y") * sensativity;
+        transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
+
+        turn.y = Mathf.Clamp(turn.y, -50f, 50f);
     }
 }
