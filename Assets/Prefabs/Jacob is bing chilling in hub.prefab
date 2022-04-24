@@ -354,7 +354,6 @@ GameObject:
   - component: {fileID: 6278434570168791445}
   - component: {fileID: 6488402095682344907}
   - component: {fileID: 1764101892075829445}
-  - component: {fileID: 8605321694350911734}
   m_Layer: 0
   m_Name: Jacob is bing chilling in hub
   m_TagString: Player
@@ -473,17 +472,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cont: {fileID: 6488402095682344907}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   camera: {fileID: 735585086695259644}
+=======
+  camera: {fileID: 0}
+>>>>>>> parent of c2d74c6 (Added placeholder materials and fixed a few Enemy and Player things)
   playerSpeed: 6
   jumpForce: 20
-  jumpCount: 1
+  jumpCount: 0
   turnSmoothing: 0.1
-  gravity: -9.81
-  groundCheck: {fileID: 4036195209291566878}
+  gravity: 20
+  groundCheck: {fileID: 0}
   groundDistance: 0.1
   groundMask:
     serializedVersion: 2
+<<<<<<< HEAD
     m_Bits: 64
 --- !u!114 &8605321694350911734
 MonoBehaviour:
@@ -510,3 +514,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
 >>>>>>> Stashed changes
+=======
+    m_Bits: 0
+>>>>>>> parent of c2d74c6 (Added placeholder materials and fixed a few Enemy and Player things)
