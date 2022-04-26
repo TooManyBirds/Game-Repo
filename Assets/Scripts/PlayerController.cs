@@ -6,17 +6,22 @@ public class PlayerController : MonoBehaviour
 {
     //Components
     public CharacterController cont;
-    public Transform camera;
-
+    public Transform playerCamera;
+    public Transform playerBody;
     // Movement Variables
-    [SerializeField]
+   
     public float playerSpeed = 6f;
     public float jumpForce = 20f;
     public float jumpCount = 0f;
-   
-    float turnVelocity;   
+    [Range(0, 1)] public float lerpFactor;
+
+
+    //Mouse input stuff
+    public float turnVelocity;   
     public float turnSmoothing = 0.1f;
-   
+    float mouseX;
+    public float mouseSensativity;
+
     //Gravity and stuff
     public float gravity = 20f;
     bool grounded;
@@ -63,14 +68,27 @@ public class PlayerController : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
+        //moving player body with mouse
+ 
+
+
+
         if (direction.magnitude >= 0.1f)
         {
             // Playerboy point in movement direction
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnVelocity, turnSmoothing);
-           
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            
+            //Responsible for moving character in movement direction
+            Vector3 moveDir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
             cont.Move(moveDir.normalized * playerSpeed * Time.deltaTime);
+        
+            if (moveDir != Vector3.zero)
+            {
+                transform.forward = moveDir * Time.deltaTime;
+                //transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime);
+
+            }
         }
     }
 }
