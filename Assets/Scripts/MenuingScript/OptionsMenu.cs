@@ -72,4 +72,9 @@ public class OptionsMenu : MonoBehaviour
         Screen.fullScreen = isFullscreen;
         Debug.Log(isFullscreen);
     }
+
+    public void setSens(float sens)
+    {
+
+    }
 }
