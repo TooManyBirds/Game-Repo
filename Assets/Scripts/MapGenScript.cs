@@ -33,30 +33,3 @@ public class MapGenScript : MonoBehaviour
 
 
 }
-
-
-public class Map
-{
-
-    public int[] row = new int[5];
-
-    public Map(int[] nums)
-    {
-        populateRow(nums);
-    }
-
-    public void populateRow(int[] nums)
-    {
-        for(int i = 0; i < row.Length; i++)
-        {
-            row[i] = nums[i];
-        }
-    }
-
-    private int[] getRow()
-    {
-        
-        return row;
-    }
-
-}
