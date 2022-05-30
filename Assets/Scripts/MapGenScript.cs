@@ -16,9 +16,6 @@ public class MapGenScript : MonoBehaviour
     //public Map Map1 = new Map(column1);
 
 
-    public List<Map> testMapLayout = new List<Map>();
-
-
     private void Awake()
     {
 
