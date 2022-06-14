@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def75f4094d03364cb6ea91f538bf45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSens: 400
+  mouseSens: 800
   playerBod: {fileID: 5609150950051366794}
   playerHead: {fileID: 0}
   turn: {x: 0, y: 0}

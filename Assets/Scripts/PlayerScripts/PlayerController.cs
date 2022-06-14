@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     //Gravity and stuff
     public float gravity = 20f;
     bool grounded;
-    Vector3 velocity;
+    protected Vector3 velocity;
 
     //Ground Checking stuff
     public Transform groundCheck;
