@@ -114,12 +114,10 @@ public class PlayerController : MonoBehaviour
         if (ADS)
         {
             Quaternion camRot = playerCamera.rotation;
-
-            Debug.Log(camRot.y * 180);
-
             Quaternion camQuat = Quaternion.Euler(0, camRot.y * 180, 0);
 
             playerBody.transform.rotation = camQuat;
+
         }
 
         /*
@@ -152,6 +150,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Dash Cool Down Over");
 
         canDash = true;
+    }
     }
 }
 
