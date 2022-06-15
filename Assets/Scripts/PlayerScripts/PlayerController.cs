@@ -8,24 +8,28 @@ public class PlayerController : MonoBehaviour
     public CharacterController cont;
     public Transform playerCamera;
     public Transform playerBody;
+    [Space]
+
     // Movement Variables
-   
     public float playerSpeed = 6f;
     public float jumpForce = 20f;
     public float jumpCount = 0f;
     [Range(0, 1)] public float lerpFactor;
-
+    [Space]
 
     //Mouse input stuff
+    public bool ADS;
     public float turnVelocity;   
     public float turnSmoothing = 0.1f;
     float mouseX;
     public float mouseSensativity;
+    [Space]
 
     //Gravity and stuff
     public float gravity = 20f;
     bool grounded;
     protected Vector3 velocity;
+    [Space]
 
     //Ground Checking stuff
     public Transform groundCheck;
@@ -89,6 +93,33 @@ public class PlayerController : MonoBehaviour
                 //transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime);
 
             }
+        }
+
+        // ADS Funcitonality
+        
+        if (Input.GetButtonDown("Fire2"))
+        {
+            //ADS Enable
+
+            Vector3 playerFor = playerBody.transform.forward;
+            Vector3 camForward = playerCamera.transform.forward;
+
+            Quaternion camRot = playerCamera.rotation;
+
+            Debug.Log(playerFor);
+            Debug.Log(camRot.y);
+
+            Quaternion camQuat = Quaternion.Euler(0, camRot.y * 180, 0);
+
+            playerBody.transform.rotation = camQuat;
+
+            ADS = true;
+        }
+        else if (Input.GetButtonUp("Fire2"))
+        {
+            //ADS Disable
+
+            ADS = false;
         }
     }
 }
