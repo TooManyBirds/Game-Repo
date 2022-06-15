@@ -12,8 +12,13 @@ public class PlayerController : MonoBehaviour
 
     // Movement Variables
     public float playerSpeed = 6f;
+    public Vector3 moveDir;
     public float jumpForce = 20f;
     public float jumpCount = 0f;
+    public float dashSpeed;
+    public float dashTime;
+    public float dashCoolDown;
+    public bool canDash = true;
     [Range(0, 1)] public float lerpFactor;
     [Space]
 
@@ -22,7 +27,6 @@ public class PlayerController : MonoBehaviour
     public float turnVelocity;   
     public float turnSmoothing = 0.1f;
     float mouseX;
-    public float mouseSensativity;
     [Space]
 
     //Gravity and stuff
@@ -40,7 +44,6 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
-
 
     void Update()
     {
@@ -84,47 +87,73 @@ public class PlayerController : MonoBehaviour
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnVelocity, turnSmoothing);
             
             //Responsible for moving character in movement direction
-            Vector3 moveDir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-            cont.Move(moveDir.normalized * playerSpeed * Time.deltaTime);
+            Vector3 tempMoveDir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+            moveDir = tempMoveDir.normalized;
+            cont.Move(tempMoveDir.normalized * playerSpeed * Time.deltaTime);
         
-            if (moveDir != Vector3.zero)
+            if (tempMoveDir != Vector3.zero)
             {
-                transform.forward = moveDir * Time.deltaTime;
+                transform.forward = tempMoveDir * Time.deltaTime;
                 //transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime);
 
             }
         }
-
-        // ADS Funcitonality
-        
+        /*
+         * 
+         * ADS Funcitonality
+         * 
+         */
         if (Input.GetButtonDown("Fire2"))
         {
             //ADS Enable
-
-            Vector3 playerFor = playerBody.transform.forward;
-            Vector3 camForward = playerCamera.transform.forward;
-
+            ADS = true;
+        } else if (Input.GetButtonUp("Fire2")) {
+            //ADS Disable
+            ADS = false;
+        }
+        if (ADS)
+        {
             Quaternion camRot = playerCamera.rotation;
 
-            Debug.Log(playerFor);
-            Debug.Log(camRot.y);
+            Debug.Log(camRot.y * 180);
 
             Quaternion camQuat = Quaternion.Euler(0, camRot.y * 180, 0);
 
             playerBody.transform.rotation = camQuat;
-
-            ADS = true;
         }
-        else if (Input.GetButtonUp("Fire2"))
-        {
-            //ADS Disable
 
-            ADS = false;
+        /*
+         * 
+         * Dash Functionaliy
+         * 
+         */
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
+            StartCoroutine(Dash());
         }
     }
+
+    IEnumerator Dash()
+    {
+        float startTime = Time.time;
+
+        canDash = false;
+        
+        while(Time.time < startTime + dashTime)
+        {
+            cont.Move(moveDir.normalized * dashSpeed * playerSpeed * Time.deltaTime);
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(dashCoolDown);
+
+        Debug.Log("Dash Cool Down Over");
+
+        canDash = true;
+    }
 }
-
-
 
 //        //Animation Updater
 //        horizontalMove = Input.GetAxisRaw("Horizontal");

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - Terrain
+  - CandiceTile
   layers:
   - Default
   - TransparentFX
