@@ -151,7 +151,6 @@ public class PlayerController : MonoBehaviour
 
         canDash = true;
     }
-    }
 }
 
 //        //Animation Updater
