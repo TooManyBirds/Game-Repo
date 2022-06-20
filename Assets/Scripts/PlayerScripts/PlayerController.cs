@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     public bool ADS;
     public float turnVelocity;   
     public float turnSmoothing = 0.1f;
+    float lerpTime = 0.0f;
+    Quaternion playerRot;
     float mouseX;
     [Space]
 
@@ -103,20 +105,32 @@ public class PlayerController : MonoBehaviour
          * ADS Funcitonality
          * 
          */
-        if (Input.GetButtonDown("Fire2"))
+        if (!ADS && Input.GetButtonDown("Fire2"))
         {
             //ADS Enable
             ADS = true;
-        } else if (Input.GetButtonUp("Fire2")) {
+            playerRot = playerBody.transform.rotation;
+        } else if ( ADS && Input.GetButtonUp("Fire2")) {
             //ADS Disable
             ADS = false;
+            lerpTime = 0.0f;
         }
         if (ADS)
         {
+            Quaternion camQuat;
             Quaternion camRot = playerCamera.rotation;
-            Quaternion camQuat = Quaternion.Euler(0, camRot.y * 180, 0);
+            if (lerpTime < 1.0)
+            {
+                float lerpAngle = Mathf.LerpAngle(playerRot.y, camRot.y * 180, lerpTime);
+                camQuat = Quaternion.Euler(0, lerpAngle, 0);
+            }
+            else
+            {
+                camQuat = camQuat = Quaternion.Euler(0, camRot.y * 180, 0);
+            }
 
             playerBody.transform.rotation = camQuat;
+            lerpTime += Time.deltaTime / 0.1f;
 
         }
 
