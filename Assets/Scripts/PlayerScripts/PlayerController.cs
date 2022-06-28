@@ -6,8 +6,13 @@ public class PlayerController : MonoBehaviour
 {
     //Components
     public CharacterController cont;
-    public Transform playerCamera;
     public Transform playerBody;
+
+    [Space]
+    public GameObject playerCamera;
+    public GameObject ADSCamera;
+
+ 
     [Space]
 
     // Movement Variables
@@ -83,7 +88,7 @@ public class PlayerController : MonoBehaviour
         if (direction.magnitude >= 0.1f)
         {
             // Playerboy point in movement direction
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCamera.transform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnVelocity, turnSmoothing);
             
             //Responsible for moving character in movement direction
@@ -106,18 +111,20 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Fire2"))
         {
             //ADS Enable
+            ADSCamera.SetActive(true);
             ADS = true;
         } else if (Input.GetButtonUp("Fire2")) {
             //ADS Disable
+            ADSCamera.SetActive(false);
             ADS = false;
+            playerBody.transform.rotation = new Quaternion(0,0,0,0);
         }
         if (ADS)
         {
-            Quaternion camRot = playerCamera.rotation;
-            Quaternion camQuat = Quaternion.Euler(0, camRot.y * 180, 0);
-
+            Quaternion camRot = playerCamera.transform.rotation;
+            Quaternion rotTo = Quaternion.RotateTowards(playerBody.rotation, camRot, 360f);
+            Quaternion camQuat = new Quaternion(0, rotTo.y, 0, rotTo.w);
             playerBody.transform.rotation = camQuat;
-
         }
 
         /*
