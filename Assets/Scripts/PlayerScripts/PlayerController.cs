@@ -7,12 +7,11 @@ public class PlayerController : MonoBehaviour
     //Components
     public CharacterController cont;
     public Transform playerBody;
-
     [Space]
+
+    //Camera
     public GameObject playerCamera;
     public GameObject ADSCamera;
-
- 
     [Space]
 
     // Movement Variables
@@ -44,6 +43,12 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.1f;
     public LayerMask groundMask;
+    [Space]
+
+    //Animation Stuff
+    public Animator playerAnimator;
+    
+
 
     void Start()
     {
@@ -126,10 +131,12 @@ public class PlayerController : MonoBehaviour
             //ADS Enable
             ADSCamera.SetActive(true);
             ADS = true;
+            playerAnimator.SetBool("aiming", ADS);
         } else if (Input.GetButtonUp("Fire2")) {
             //ADS Disable
             ADSCamera.SetActive(false);
             ADS = false;
+            playerAnimator.SetBool("aiming", ADS);
             playerBody.transform.rotation = new Quaternion(0,0,0,0);
         }
         if (ADS)
@@ -157,40 +164,21 @@ public class PlayerController : MonoBehaviour
         float startTime = Time.time;
 
         canDash = false;
-        
-        while(Time.time < startTime + dashTime)
+
+        playerAnimator.SetBool("dashing", canDash);
+
+        while (Time.time < startTime + dashTime)
         {
             cont.Move(moveDir.normalized * dashSpeed * playerSpeed * Time.deltaTime);
 
             yield return null;
         }
-
         yield return new WaitForSeconds(dashCoolDown);
 
         Debug.Log("Dash Cool Down Over");
 
         canDash = true;
+
+        playerAnimator.SetBool("dashing", canDash);
     }
 }
-
-//        //Animation Updater
-//        horizontalMove = Input.GetAxisRaw("Horizontal");
-//        if(horizontalMove != 0)
-//        { 
-//            //Set walk/run animation
-//        }
-//        else
-//        {
-//            //Undo animation
-//        }
-//        if(horizontalMove > 0)
-//        {
-//            direction = 1;
-//        }
-//        if(horizontalMove < 0)
-//        {
-//            direction = -1;
-//        }
-
-//    }
-//}
