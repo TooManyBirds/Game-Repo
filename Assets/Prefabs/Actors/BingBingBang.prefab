@@ -512,7 +512,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 11
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 3618683683321363386}
   m_Follow: {fileID: 8516994487782001858}
@@ -914,7 +914,7 @@ MonoBehaviour:
   m_LookaheadIgnoreY: 0
   m_HorizontalDamping: 0.5
   m_VerticalDamping: 0.5
-  m_ScreenX: 0.5
+  m_ScreenX: 0.4
   m_ScreenY: 0.5
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
@@ -1252,7 +1252,7 @@ MonoBehaviour:
   m_LookaheadIgnoreY: 0
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
-  m_ScreenX: 0.5
+  m_ScreenX: 0.4
   m_ScreenY: 0.55
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
@@ -1284,9 +1284,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6721324156780018009}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8516994489128712661}
   - {fileID: 8528265186637841035}
@@ -1436,15 +1436,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cont: {fileID: 8516994487782001857}
   playerBody: {fileID: 8516994488117871524}
-  playerCamera: {fileID: 8516994489128712661}
-  ADSCamera: {fileID: 0}
+  playerCamera: {fileID: 8516994489128712660}
+  ADSCamera: {fileID: 3504019882230977398}
   playerSpeed: 6
   moveDir: {x: 0, y: 0, z: 0}
   jumpForce: 10
   jumpCount: 0
   dashSpeed: 3
   dashTime: 0.2
-  dashCoolDown: 2
+  dashCoolDown: 1
   canDash: 1
   lerpFactor: 0
   ADS: 0
@@ -1608,8 +1608,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8516994489128712660}
-  m_LocalRotation: {x: 0.14031075, y: 0.5829589, z: -0.10306425, w: 0.7936307}
-  m_LocalPosition: {x: -9.542302, y: 2.8571434, z: -2.9907308}
+  m_LocalRotation: {x: 0.1403108, y: 0.5829589, z: -0.103064254, w: 0.7936307}
+  m_LocalPosition: {x: -9.542302, y: 5.714287, z: -2.9907308}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2983724748859142249}
@@ -1995,7 +1995,7 @@ MonoBehaviour:
   m_LookaheadIgnoreY: 0
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
-  m_ScreenX: 0.5
+  m_ScreenX: 0.4
   m_ScreenY: 0.6
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0

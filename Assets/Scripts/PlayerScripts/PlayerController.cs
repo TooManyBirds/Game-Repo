@@ -103,6 +103,19 @@ public class PlayerController : MonoBehaviour
 
             }
         }
+
+        /*
+         * 
+         * Shooting Functionality
+         * 
+         */
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Debug.Log("shoot");
+        }
+
+
         /*
          * 
          * ADS Funcitonality
