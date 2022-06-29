@@ -412,7 +412,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2721920611024687811}
   m_LocalRotation: {x: 0.14031075, y: 0.58295894, z: -0.10306426, w: 0.7936306}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.0000038146973, y: -0.00000071525574, z: -0.00000047683636}
   m_LocalScale: {x: 1, y: 0.7142856, z: 1}
   m_Children:
   - {fileID: 52639972949659529}
@@ -485,7 +485,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3504019882230977398}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -9.542302, y: 2.8571434, z: -2.9907308}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Follow: {fileID: 8516994487782001858}
   m_CommonLens: 1
   m_Lens:
-    FieldOfView: 30
+    FieldOfView: 25
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -747,8 +747,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3933435270656987176}
-  m_LocalRotation: {x: 0.018687265, y: 0.97903955, z: -0.17308943, w: 0.10570014}
-  m_LocalPosition: {x: 7.407916, y: -0.0000076293945, z: 12.7603}
+  m_LocalRotation: {x: 0.14031076, y: 0.5829589, z: -0.10306425, w: 0.79363066}
+  m_LocalPosition: {x: -0.0000038146973, y: -0.00000071525574, z: -0.00000047683716}
   m_LocalScale: {x: 1, y: 0.7142856, z: 1}
   m_Children:
   - {fileID: 8474100636228364055}
@@ -783,7 +783,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 36
+    FieldOfView: 25
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -1085,8 +1085,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6391759767086863883}
-  m_LocalRotation: {x: 0.015851408, y: 0.9833217, z: -0.14682235, w: 0.10616255}
-  m_LocalPosition: {x: 7.407914, y: -0.000008106232, z: 12.760302}
+  m_LocalRotation: {x: 0.12269489, y: 0.58509904, z: -0.09012457, w: 0.79654413}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.7142856, z: 1}
   m_Children:
   - {fileID: 1013409588829834335}
@@ -1121,7 +1121,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 36
+    FieldOfView: 25
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -1318,8 +1318,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7847493904434277815}
-  m_LocalRotation: {x: 0.1258518, y: 0.58473724, z: -0.092443466, w: 0.7960514}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.12585182, y: 0.58473724, z: -0.09244347, w: 0.7960515}
+  m_LocalPosition: {x: -0.0000038146973, y: -0.00000071525574, z: -0.00000047683636}
   m_LocalScale: {x: 1, y: 0.7142856, z: 1}
   m_Children:
   - {fileID: 6860664406925147320}
@@ -1725,7 +1725,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8768904674131914995}
   m_LocalRotation: {x: 0.11138956, y: 0.586318, z: -0.08182029, w: 0.7982035}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.000034332275, y: -0.000004053116, z: -0.00000715255}
   m_LocalScale: {x: 1, y: 0.7142856, z: 1}
   m_Children:
   - {fileID: 5453703544729021702}
@@ -1828,8 +1828,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8829845233489466051}
-  m_LocalRotation: {x: 0.12966841, y: 0.58428705, z: -0.09524693, w: 0.79543877}
-  m_LocalPosition: {x: -0.0000038146973, y: -0.00000071525574, z: -0.00000047683716}
+  m_LocalRotation: {x: 0.13150658, y: 0.5840653, z: -0.09659715, w: 0.79513687}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.7142856, z: 1}
   m_Children:
   - {fileID: 6090736840954463604}
@@ -1864,7 +1864,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 36
+    FieldOfView: 25
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
