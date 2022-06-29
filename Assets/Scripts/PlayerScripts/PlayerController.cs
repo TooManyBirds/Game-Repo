@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
             }
 
             playerBody.transform.rotation = camQuat;
-            lerpTime += Time.deltaTime / 0.1f;
+            lerpTime += Time.deltaTime / 2f;
 
         }
 
