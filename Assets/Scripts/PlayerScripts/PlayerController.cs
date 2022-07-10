@@ -6,8 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     //Components
     public CharacterController cont;
-    public Transform playerCamera;
     public Transform playerBody;
+    [Space]
+
+    //Camera
+    public GameObject playerCamera;
+    public GameObject ADSCamera;
     [Space]
 
     // Movement Variables
@@ -26,8 +30,6 @@ public class PlayerController : MonoBehaviour
     public bool ADS;
     public float turnVelocity;   
     public float turnSmoothing = 0.1f;
-    float lerpTime = 0.0f;
-    Quaternion playerRot;
     float mouseX;
     [Space]
 
@@ -41,6 +43,12 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.1f;
     public LayerMask groundMask;
+    [Space]
+
+    //Animation Stuff
+    public Animator playerAnimator;
+    
+
 
     void Start()
     {
@@ -85,7 +93,7 @@ public class PlayerController : MonoBehaviour
         if (direction.magnitude >= 0.1f)
         {
             // Playerboy point in movement direction
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCamera.transform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnVelocity, turnSmoothing);
             
             //Responsible for moving character in movement direction
@@ -100,38 +108,43 @@ public class PlayerController : MonoBehaviour
 
             }
         }
+
+        /*
+         * 
+         * Shooting Functionality
+         * 
+         */
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Debug.Log("shoot");
+        }
+
+
         /*
          * 
          * ADS Funcitonality
          * 
          */
-        if (!ADS && Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2"))
         {
             //ADS Enable
+            ADSCamera.SetActive(true);
             ADS = true;
-            playerRot = playerBody.transform.rotation;
-        } else if ( ADS && Input.GetButtonUp("Fire2")) {
+            playerAnimator.SetBool("aiming", ADS);
+        } else if (Input.GetButtonUp("Fire2")) {
             //ADS Disable
+            ADSCamera.SetActive(false);
             ADS = false;
-            lerpTime = 0.0f;
+            playerAnimator.SetBool("aiming", ADS);
+            playerBody.transform.rotation = new Quaternion(0,0,0,0);
         }
         if (ADS)
         {
-            Quaternion camQuat;
-            Quaternion camRot = playerCamera.rotation;
-            if (lerpTime < 1.0)
-            {
-                float lerpAngle = Mathf.LerpAngle(playerRot.y, camRot.y * 180, lerpTime);
-                camQuat = Quaternion.Euler(0, lerpAngle, 0);
-            }
-            else
-            {
-                camQuat = camQuat = Quaternion.Euler(0, camRot.y * 180, 0);
-            }
-
+            Quaternion camRot = playerCamera.transform.rotation;
+            Quaternion rotTo = Quaternion.RotateTowards(playerBody.rotation, camRot, 360f);
+            Quaternion camQuat = new Quaternion(0, rotTo.y, 0, rotTo.w);
             playerBody.transform.rotation = camQuat;
-            lerpTime += Time.deltaTime / 2f;
-
         }
 
         /*
@@ -151,40 +164,21 @@ public class PlayerController : MonoBehaviour
         float startTime = Time.time;
 
         canDash = false;
-        
-        while(Time.time < startTime + dashTime)
+
+        playerAnimator.SetBool("dashing", canDash);
+
+        while (Time.time < startTime + dashTime)
         {
             cont.Move(moveDir.normalized * dashSpeed * playerSpeed * Time.deltaTime);
 
             yield return null;
         }
-
         yield return new WaitForSeconds(dashCoolDown);
 
         Debug.Log("Dash Cool Down Over");
 
         canDash = true;
+
+        playerAnimator.SetBool("dashing", canDash);
     }
 }
-
-//        //Animation Updater
-//        horizontalMove = Input.GetAxisRaw("Horizontal");
-//        if(horizontalMove != 0)
-//        { 
-//            //Set walk/run animation
-//        }
-//        else
-//        {
-//            //Undo animation
-//        }
-//        if(horizontalMove > 0)
-//        {
-//            direction = 1;
-//        }
-//        if(horizontalMove < 0)
-//        {
-//            direction = -1;
-//        }
-
-//    }
-//}
