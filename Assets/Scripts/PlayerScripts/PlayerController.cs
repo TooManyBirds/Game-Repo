@@ -69,7 +69,16 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = jumpForce;
             jumpCount++;
+            playerAnimator.SetBool("Jump", true);
+            Debug.Log("JUMP");
+
         }
+        else
+        {
+            playerAnimator.SetBool("Jump", false);
+            //Debug.Log("");
+        }
+
         // Gravity
         velocity.y += gravity * Time.deltaTime;
 
@@ -100,13 +109,22 @@ public class PlayerController : MonoBehaviour
             Vector3 tempMoveDir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
             moveDir = tempMoveDir.normalized;
             cont.Move(tempMoveDir.normalized * playerSpeed * Time.deltaTime);
-        
+            playerAnimator.SetBool("Walking", true);
+            Debug.Log("WALK");
+
+
             if (tempMoveDir != Vector3.zero)
             {
                 transform.forward = tempMoveDir * Time.deltaTime;
                 //transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime);
 
             }
+        }
+        //if (direction.magnitude <= 0.01f)
+        else
+        {
+            playerAnimator.SetBool("Walking", false);
+           // Debug.Log("NO WALK");
         }
 
         /*
