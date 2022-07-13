@@ -57,6 +57,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        playerAnimator.SetBool("ReJump", false);
+
         // Gravity and Jumping
         grounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if (grounded && velocity.y < 0)
@@ -65,11 +67,31 @@ public class PlayerController : MonoBehaviour
             jumpCount = 0;
         }
 
-        if (Input.GetButtonDown("Jump") && jumpCount < 2)
+        if (Input.GetButtonDown("Jump"))
         {
-            velocity.y = jumpForce;
-            jumpCount++;
+            if (jumpCount < 2) velocity.y = jumpForce; //Will not add additional force if the max number of jumps has been reached.
+            if (jumpCount <= 2) jumpCount++; //jumpCount will be allowed to go over the max jump count. This is useful for the conditionals that follow. However, the <= limits it just allows the variable to go over the max by 1, to prevent overflow.
         }
+
+        if (grounded && Input.GetButtonDown("Jump")) 
+        {
+            //The first jump.
+            playerAnimator.SetBool("Jump", true);
+            Debug.Log("Jumping true");
+        }
+        else if (!grounded && Input.GetButtonDown("Jump") && jumpCount <= 2) //&& jumpCount < 2)
+        {
+            //Every jump beyond the first jump.
+            playerAnimator.SetBool("ReJump", true);
+            Debug.Log("JUMMMMMMMMMMMMMMMMMMMMMMP");
+        }
+        //Keep separate.
+        if (grounded && !Input.GetButtonDown("Jump"))
+        {
+            playerAnimator.SetBool("Jump", false);
+        }
+        
+
         // Gravity
         velocity.y += gravity * Time.deltaTime;
 
@@ -100,13 +122,22 @@ public class PlayerController : MonoBehaviour
             Vector3 tempMoveDir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
             moveDir = tempMoveDir.normalized;
             cont.Move(tempMoveDir.normalized * playerSpeed * Time.deltaTime);
-        
+            playerAnimator.SetBool("Walking", true);
+            Debug.Log("WALK");
+
+
             if (tempMoveDir != Vector3.zero)
             {
                 transform.forward = tempMoveDir * Time.deltaTime;
                 //transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime);
 
             }
+        }
+        //if (direction.magnitude <= 0.01f)
+        else
+        {
+            playerAnimator.SetBool("Walking", false);
+           // Debug.Log("NO WALK");
         }
 
         /*
@@ -156,7 +187,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             StartCoroutine(Dash());
+
         }
+        else
+            playerAnimator.SetBool("dashing", false);
     }
 
     IEnumerator Dash()
@@ -171,6 +205,7 @@ public class PlayerController : MonoBehaviour
         {
             cont.Move(moveDir.normalized * dashSpeed * playerSpeed * Time.deltaTime);
 
+            playerAnimator.SetBool("dashing", true);
             yield return null;
         }
         yield return new WaitForSeconds(dashCoolDown);
