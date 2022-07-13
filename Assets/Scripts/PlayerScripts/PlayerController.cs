@@ -5,10 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //Components
+    //public CharacterController cont;
     public CharacterController cont;
     public Transform playerBody;
     [Space]
 
+    public float mass = 5.0f;
+    public float gravityMod = 1.0f;
     //Camera
     public GameObject playerCamera;
     public GameObject ADSCamera;
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public float dashTime;
     public float dashCoolDown;
     public bool canDash = true;
+    bool isJumping = false;
     [Range(0, 1)] public float lerpFactor;
     [Space]
 
@@ -57,23 +61,29 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        float totalForce = -(mass * 9.8f);
         playerAnimator.SetBool("ReJump", false);
+        float initialVelocity = velocity.y;
 
         // Gravity and Jumping
+
+
         grounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (Input.GetButtonUp("Jump")) isJumping = false;
+        if (velocity.y < 0 && Input.GetButton("Jump") && isJumping == true) isJumping = false;
+
         if (grounded && velocity.y < 0)
         {
-            velocity.y = 0;
             jumpCount = 0;
         }
 
         if (Input.GetButtonDown("Jump"))
         {
-            if (jumpCount < 2) velocity.y = jumpForce; //Will not add additional force if the max number of jumps has been reached.
+            if (jumpCount < 2) { initialVelocity = jumpForce; isJumping = true; } //Will not add additional force if the max number of jumps has been reached.
             if (jumpCount <= 2) jumpCount++; //jumpCount will be allowed to go over the max jump count. This is useful for the conditionals that follow. However, the <= limits it just allows the variable to go over the max by 1, to prevent overflow.
         }
 
-        if (grounded && Input.GetButtonDown("Jump")) 
+        if (grounded && Input.GetButtonDown("Jump") && jumpCount <= 2) 
         {
             //The first jump.
             playerAnimator.SetBool("Jump", true);
@@ -86,19 +96,13 @@ public class PlayerController : MonoBehaviour
             Debug.Log("JUMMMMMMMMMMMMMMMMMMMMMMP");
         }
         //Keep separate.
-        if (grounded && !Input.GetButtonDown("Jump"))
+        if (grounded && !Input.GetButtonDown("Jump") && !isJumping)
         {
             playerAnimator.SetBool("Jump", false);
         }
-        
 
-        // Gravity
-        velocity.y += gravity * Time.deltaTime;
 
-        if (velocity.y < -20f)
-        {
-            velocity.y = -20f;
-        }
+
         //Changing player velocity
         cont.Move(velocity * Time.deltaTime);
 
@@ -183,7 +187,14 @@ public class PlayerController : MonoBehaviour
          * Dash Functionaliy
          * 
          */
-
+        if (velocity.x > 5f)
+        {
+            velocity.x = 5f;
+        }
+        if (velocity.z > 5f)
+        {
+            velocity.z = 5f;
+        }
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             StartCoroutine(Dash());
@@ -191,15 +202,24 @@ public class PlayerController : MonoBehaviour
         }
         else
             playerAnimator.SetBool("dashing", false);
-    }
+        //if (applyJump) StartCoroutine(ApplyJumpForce(velocity.y, totalForce, jumpForce, 0.2f));
+        velocity.y = initialVelocity + ((-9.8f * gravityMod) * Time.deltaTime);
 
+        //if (!isJumping)
+        if (grounded && !isJumping) { velocity.y = 0.0f; }
+        //else { Debug.Log("6776867897689768976897869"); }
+
+
+
+    }
+    // WARNING DANKLE CODE DANKLE CODE DANKLE CODE TOO DANK FEELS DANKLE MAN
     IEnumerator Dash()
     {
         float startTime = Time.time;
 
         canDash = false;
 
-        playerAnimator.SetBool("dashing", canDash);
+        playerAnimator.SetBool("dashing", false);
 
         while (Time.time < startTime + dashTime)
         {
@@ -214,6 +234,9 @@ public class PlayerController : MonoBehaviour
 
         canDash = true;
 
-        playerAnimator.SetBool("dashing", canDash);
+        playerAnimator.SetBool("dashing", false);
     }
+
+
+
 }
