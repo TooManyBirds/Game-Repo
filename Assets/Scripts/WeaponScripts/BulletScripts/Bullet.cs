@@ -10,11 +10,11 @@ public class Bullet : MonoBehaviour
     public float initialLifetime = 1.0f;
     protected float currentLifetime = 0.0f;
 
-    protected float startDropoffDistance = 0.0f;
-    protected float endDropoffDistance = 0.0f;
+    public float startDropoffDistance = 0.0f;
+    public float endDropoffDistance = 0.0f;
 
-    protected float startDropoffDamage = 0.0f;
-    protected float endDropoffDamage = 0.0f;
+    public float startDropoffDamage = 0.0f;
+    public float endDropoffDamage = 0.0f;
 
     protected Vector3 initialPosition = new Vector3(0.0f, 0.0f, 0.0f);
 
@@ -30,11 +30,15 @@ public class Bullet : MonoBehaviour
     public void SetTrajectory(Vector3 direction)
     {
         direction = trajectory;
+        gameObject.transform.rotation = Quaternion.Euler(trajectory);
+
+
     }
 
     public void SetPosition(Vector3 position)
     {
         initialPosition = position;
+        gameObject.transform.position = initialPosition;
     }
 
     public void SetStartDamage(float damage)
@@ -57,4 +61,21 @@ public class Bullet : MonoBehaviour
         //Override
         return 0.0f;
     }
+
+    public virtual void Launch()
+    {
+    }
+
+    private void Update()
+    {
+        if (currentLifetime <= 0.0)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            currentLifetime -= Time.deltaTime;
+        }
+    }
+
 }

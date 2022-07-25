@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
 
     //Animation Stuff
     public Animator playerAnimator;
+
+    public Gun gun;
     
 
 
@@ -152,9 +154,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("shoot");
+            Shoot();
         }
 
+        if (Input.GetButtonDown("Reload"))
+        {
+            Reload();
+        }
 
         /*
          * 
@@ -235,6 +241,16 @@ public class PlayerController : MonoBehaviour
         canDash = true;
 
         playerAnimator.SetBool("dashing", false);
+    }
+
+    public void Shoot()
+    {
+        gun.Shoot();
+    }
+
+    public void Reload()
+    {
+        gun.Reload();
     }
 
 

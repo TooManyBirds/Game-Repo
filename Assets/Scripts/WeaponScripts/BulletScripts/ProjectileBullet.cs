@@ -15,18 +15,6 @@ public class ProjectileBullet : Bullet
 
     public DamageCalculationType type = DamageCalculationType.OverDistance;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     protected override float CalculateDamage()
     {
         //base.CalculateDamage();
@@ -69,6 +57,13 @@ public class ProjectileBullet : Bullet
 
     private void OnEnable()
     {
+        Launch();
+    }
+
+    public override void Launch()
+    {
         body.AddForce(trajectory * speed);
+
+
     }
 }

@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class Pistol : Gun
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     public override void Shoot()
     {
@@ -17,12 +13,5 @@ public class Pistol : Gun
     public override void Reload()
     {
         base.Reload();
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
