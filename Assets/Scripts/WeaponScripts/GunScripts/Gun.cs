@@ -38,7 +38,9 @@ public class Gun : MonoBehaviour
                 {
                     currentAmmoAmount -= 1.0f;
                     newBullet.SetPosition(barrelEnd.gameObject.transform.position);
-                    newBullet.SetTrajectory(barrelEnd.gameObject.transform.rotation.eulerAngles);
+                    newBullet.SetAngle(barrelEnd.gameObject.transform.rotation);
+                    //Debug.Log(barrelEnd.gameObject.transform.rotation.eulerAngles);
+                    newBullet.SetTrajectory(barrelEnd.gameObject.transform.position - gameObject.transform.position);
                     currentPerBulletCooldown = maxPerBulletCooldown;
                    // newBullet.Launch();
                 }

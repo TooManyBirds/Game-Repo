@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5155099380485218601}
   - component: {fileID: 7188504062683018443}
   - component: {fileID: 9211840021486948877}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6378435738096972135}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.8383069, y: -4.811207, z: -10.01882}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 200
+  trajectory: {x: 0, y: 0, z: 0}
   initialLifetime: 10
   startDropoffDistance: 45
   endDropoffDistance: 20

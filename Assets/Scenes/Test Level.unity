@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 252366711}
   m_Layer: 6
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -434,11 +434,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8077331114518861589, guid: 59f42db38a29b7b4785fb7df275b3015, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.021065688
+      value: 0.021065667
       objectReference: {fileID: 0}
     - target: {fileID: 8077331114518861589, guid: 59f42db38a29b7b4785fb7df275b3015, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.02302061
+      value: 0.023020588
       objectReference: {fileID: 0}
     - target: {fileID: 8516994487782001856, guid: 59f42db38a29b7b4785fb7df275b3015, type: 3}
       propertyPath: gun

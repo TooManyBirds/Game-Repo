@@ -55,15 +55,28 @@ public class ProjectileBullet : Bullet
         
     }
 
-    private void OnEnable()
+    protected override void Start()
     {
+        base.Start();
         Launch();
     }
 
+
     public override void Launch()
     {
-        body.AddForce(trajectory * speed);
+        base.Launch();
+       // body.AddForce(trajectory * speed);
+        body.AddRelativeForce(trajectory * speed);
+      //  gameObject.transform.rotation = 
 
 
+    }
+
+    protected void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
